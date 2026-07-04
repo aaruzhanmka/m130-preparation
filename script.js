@@ -1,5 +1,39 @@
 if (typeof QUESTIONS !== "undefined" && typeof NEW_QUESTIONS !== "undefined") {
-  QUESTIONS.push(...NEW_QUESTIONS);
+  const letters = ["A", "B", "C", "D", "E"];
+
+  const fixedNewQuestions = NEW_QUESTIONS
+    .map(q => {
+      if (
+        q.text &&
+        Array.isArray(q.options) &&
+        typeof q.options[0] === "object" &&
+        q.correct
+      ) {
+        return q;
+      }
+
+      const answerIndexes = Array.isArray(q.answer) ? q.answer : [q.answer];
+
+      return {
+        id: q.id,
+        subject: q.subject,
+        topic: q.topic,
+        difficulty: q.difficulty || "B",
+        text: q.question || q.text || "Вопрос не указан",
+        options: (q.options || []).map((optionText, index) => ({
+          letter: letters[index],
+          text: String(optionText)
+        })),
+        correct: answerIndexes.map(index => letters[index]).filter(Boolean),
+        multi: answerIndexes.length > 1,
+        explanation: q.explanation || "",
+        source: q.source || ""
+      };
+    })
+    .filter(q => q.text !== "Вопрос не указан" && q.options.length > 0 && q.correct.length > 0);
+
+  QUESTIONS.push(...fixedNewQuestions);
+}
 }
 const $=s=>document.querySelector(s); const $$=s=>Array.from(document.querySelectorAll(s));
 const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){localStorage.setItem(k,JSON.stringify(v))}};
