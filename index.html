@@ -91,7 +91,41 @@
 
   <footer>Сайт работает без сервера. Прогресс хранится только в твоём браузере.</footer>
   <script src="data.js"></script>
-  <script src="data_new_questions.js"></script>
-  <script src="script.js"></script>
+<script src="data_new_questions.js"></script>
+
+<script>
+  // Исправляет формат новых вопросов под старый сайт
+  (function () {
+    const letters = ["A", "B", "C", "D", "E"];
+
+    function fixQuestion(q) {
+      if (q.text && q.correct) return q;
+
+      const answerIndexes = Array.isArray(q.answer) ? q.answer : [q.answer];
+
+      return {
+        id: q.id,
+        subject: q.subject,
+        topic: q.topic,
+        difficulty: q.difficulty || "B",
+        text: q.question || q.text || "",
+        options: (q.options || []).map((optionText, index) => ({
+          letter: letters[index],
+          text: optionText
+        })),
+        correct: answerIndexes.map(index => letters[index]).filter(Boolean),
+        multi: answerIndexes.length > 1,
+        explanation: q.explanation || "",
+        source: q.source || ""
+      };
+    }
+
+    if (typeof NEW_QUESTIONS !== "undefined" && Array.isArray(NEW_QUESTIONS)) {
+      NEW_QUESTIONS.splice(0, NEW_QUESTIONS.length, ...NEW_QUESTIONS.map(fixQuestion));
+    }
+  })();
+</script>
+
+<script src="script.js"></script>
 </body>
 </html>
