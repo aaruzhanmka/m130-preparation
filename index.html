@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>М130: Квалиметрия + ИКБП</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="badge">М130 • магистратура</div>
+      <h1>Квалиметрия + ИКБП</h1>
+      <p>Тренажёр по вопросам: темы, экзамен, ошибки, прогресс.</p>
+    </div>
+    <button id="themeBtn" class="ghost">🌙</button>
+  </header>
+
+  <main>
+    <section id="home" class="grid">
+      <article class="card hero">
+        <h2>Привет, Аружан 💅</h2>
+        <p>Выбирай режим и решай тесты. Ошибки сохраняются автоматически в этом браузере.</p>
+        <div class="stats" id="statsBox"></div>
+      </article>
+
+      <button class="mode card" data-mode="exam"><span>⏱️</span><b>Экзамен</b><small>30 квалиметрия + 20 ИКБП, таймер</small></button>
+      <button class="mode card" data-mode="quick"><span>⚡</span><b>Быстрый тест</b><small>10 случайных вопросов</small></button>
+      <button class="mode card" data-mode="qual"><span>📐</span><b>Квалиметрия</b><small>100 вопросов</small></button>
+      <button class="mode card" data-mode="icbp"><span>🧪</span><b>ИКБП</b><small>110 вопросов</small></button>
+      <button class="mode card" data-mode="mistakes"><span>🔁</span><b>Мои ошибки</b><small>повтор неправильных</small></button>
+      <button class="mode card" data-mode="topics"><span>📚</span><b>По темам</b><small>выбрать конкретную тему</small></button>
+      <button class="mode card" data-mode="cheats"><span>📝</span><b>Шпаргалка</b><small>формулы и термины</small></button>
+    </section>
+
+    <section id="topicSelect" class="hidden page">
+      <button class="back">← назад</button>
+      <h2>Выбери тему</h2>
+      <div id="topicsList" class="topic-list"></div>
+    </section>
+
+    <section id="quiz" class="hidden page">
+      <div class="quiz-head">
+        <button class="back">← домой</button>
+        <div class="pill" id="quizMode"></div>
+        <div class="timer" id="timer"></div>
+      </div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <article class="question-card">
+        <div class="meta"><span id="qSubject"></span><span id="qTopic"></span><span id="qCounter"></span></div>
+        <h2 id="qText"></h2>
+        <p id="multiHint" class="hint"></p>
+        <div id="options"></div>
+        <div class="actions">
+          <button id="checkBtn" class="primary">Проверить</button>
+          <button id="nextBtn" class="primary hidden">Дальше</button>
+          <button id="skipBtn" class="ghost">Пропустить</button>
+        </div>
+        <div id="feedback" class="feedback hidden"></div>
+      </article>
+    </section>
+
+    <section id="result" class="hidden page result-card">
+      <h2 id="resultTitle">Результат</h2>
+      <div id="resultStats"></div>
+      <div class="actions center">
+        <button id="reviewWrong" class="primary">Повторить ошибки</button>
+        <button class="back ghost">На главную</button>
+      </div>
+    </section>
+
+    <section id="cheats" class="hidden page">
+      <button class="back">← назад</button>
+      <h2>Мини-шпаргалка</h2>
+      <div class="cheats-grid">
+        <div class="card"><h3>Квалиметрия</h3><p>Наука о количественной оценке качества объектов. Главная логика: свойства → показатели → весомости → обобщённая оценка.</p></div>
+        <div class="card"><h3>Коэффициент весомости</h3><p>Показывает значимость одного показателя среди других. Часто определяется экспертными методами.</p></div>
+        <div class="card"><h3>Дифференциальный метод</h3><p>Сравнивает единичные показатели оцениваемого изделия с базовыми.</p></div>
+        <div class="card"><h3>Комплексный метод</h3><p>Даёт одну обобщённую оценку по нескольким свойствам.</p></div>
+        <div class="card"><h3>Интегральный показатель</h3><p>Связывает полезный эффект от эксплуатации с затратами на создание и эксплуатацию.</p></div>
+        <div class="card"><h3>Шкала отношений</h3><p>Есть абсолютный ноль, можно сравнивать во сколько раз одно значение больше другого.</p></div>
+        <div class="card"><h3>Испытания</h3><p>Экспериментальное определение характеристик объекта при воздействии, функционировании или моделировании.</p></div>
+        <div class="card"><h3>Протокол испытаний</h3><p>Содержит сведения о продукции, средствах испытаний, условиях, результатах и вывод о соответствии НТД.</p></div>
+        <div class="card"><h3>Виброустойчивость</h3><p>Способность выполнять функции во время вибрации.</p></div>
+        <div class="card"><h3>Вибропрочность</h3><p>Способность сохранять работоспособность после воздействия вибрации.</p></div>
+        <div class="card"><h3>Ударная устойчивость</h3><p>Способность выполнять функции во время ударного воздействия.</p></div>
+        <div class="card"><h3>Ударная прочность</h3><p>Способность сохранять параметры после ударного воздействия.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Сайт работает без сервера. Прогресс хранится только в твоём браузере.</footer>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
