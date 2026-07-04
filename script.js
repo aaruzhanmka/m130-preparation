@@ -1,4 +1,6 @@
-
+if (typeof QUESTIONS !== "undefined" && typeof NEW_QUESTIONS !== "undefined") {
+  QUESTIONS.push(...NEW_QUESTIONS);
+}
 const $=s=>document.querySelector(s); const $$=s=>Array.from(document.querySelectorAll(s));
 const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){localStorage.setItem(k,JSON.stringify(v))}};
 let state={questions:[],idx:0,score:0,selected:new Set(),checked:false,wrong:[],started:0,timer:null,mode:''};
